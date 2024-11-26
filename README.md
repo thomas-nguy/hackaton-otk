@@ -17,9 +17,9 @@ DEPLOYER_WALLET_PRIVATE_KEY=
 
 ## Step 2
 
-Deploy Smart account
+Deploy Smart account with otk addresses
 ```aiignore
-yarn deploy
+yarn deploy --args "addr1,addr2"
 ```
 
 Result 
@@ -52,7 +52,7 @@ WALLET_PRIVATE_KEY=0xe50b01b94e4c585be608a22253689009ae0705f33e794a16bf40bc4c958
 #WALLET_PRIVATE_KEY=0x2542ee83e18bd714613d8d1714960cdf1b00c6459309755188e578fb06085d8e
 ```
 
-change in deploy/abstract.ts
+change in deploy/interact.ts
 
 ```aiignore
 

@@ -7,11 +7,12 @@
   "repository": "https://github.com/matter-labs/zksync-hardhat-template.git",
   "scripts": {
     "compile": "hardhat compile",
-    "deploy": "hardhat deploy-zksync --script deploy-OTKAccount.ts",
-    "interact": "hardhat deploy-zksync --script abstract.ts",
+    "deploy": "ts-node deploy/deploy-OTKAccount.ts",
+    "interact": "hardhat deploy-zksync --script interact.ts",
     "clean": "hardhat clean"
   },
   "devDependencies": {
+    "commander": "^8.3.0",
     "@matterlabs/hardhat-zksync": "^1.1.0",
     "@matterlabs/zksync-contracts": "^0.6.1",
     "@openzeppelin/contracts": "^4.9.2",

@@ -1,36 +1,25 @@
 import * as hre from "hardhat";
-import { getWallet } from "./utils";
-import { ethers } from "ethers";
+import { serializeEip712 } from "zksync-ethers/build/utils"
+import {parseEther, VoidSigner} from "ethers";
+import {Signer} from "zksync-ethers";
+import {getWallet} from "./utils";
 
-// Address of the contract to interact with
-const CONTRACT_ADDRESS = "0x13D5C28Aa5BdDc6a1F902E5fD8c22bD27cB6bFBc";
-if (!CONTRACT_ADDRESS) throw "⛔️ Provide address of the contract to interact with!";
+const SMART_CONTRACT_ADDRESS = "0xCa9e91C7481A85889d05670B9233D9cAd9F4F7B9";
+const provider = hre.zksyncEthers.providerL2;
 
-// An example of a script to interact with the contract
+
 export default async function () {
-  console.log(`Running script to interact with contract ${CONTRACT_ADDRESS}`);
 
-  // Load compiled contract info
-  const contractArtifact = await hre.artifacts.readArtifact("Greeter");
+  const wallet = getWallet();
+  const nonce = await provider.getTransactionCount(SMART_CONTRACT_ADDRESS);
+  console.log("sending transaction using ", wallet.address);
 
-  // Initialize contract instance for interaction
-  const contract = new ethers.Contract(
-    CONTRACT_ADDRESS,
-    contractArtifact.abi,
-    getWallet() // Interact with the contract on behalf of this wallet
-  );
+  const response = await wallet.sendTransaction({
+    nonce: nonce,
+    to: wallet.address,
+    value: parseEther("0.01"),
+    from: SMART_CONTRACT_ADDRESS,
+  });
 
-  // Run contract read function
-  const response = await contract.greet();
-  console.log(`Current message is: ${response}`);
-
-  // Run contract write function
-  const transaction = await contract.setGreeting("Hello people!");
-  console.log(`Transaction hash of setting new message: ${transaction.hash}`);
-
-  // Wait until transaction is processed
-  await transaction.wait();
-
-  // Read message after transaction
-  console.log(`The message now is: ${await contract.greet()}`);
+  console.log(response);
 }
