@@ -1,6 +1,5 @@
-import * as hre from "hardhat";
 import { getWallet } from "./utils";
-import {ethers, parseEther} from "ethers";
+import {parseEther} from "ethers";
 
 // Address of the contract to interact with
 const CONTRACT_ADDRESS = "0xCdE2672D97855766094A12713b98568cFC425810";

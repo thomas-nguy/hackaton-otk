@@ -63,4 +63,4 @@ and run
 yarn interact
 ```
 
-The scripts with send a transfer transaction from smart account address and sign with wallet private key
+The scripts with send a transfer transaction from smart account address and sign with the chosen wallet private key

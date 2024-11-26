@@ -1,4 +1,4 @@
-import {deployAccount, deployContract, getWallet} from "./utils";
+import {deployAccount, getWallet} from "./utils";
 import {parseEther} from "ethers";
 import {Command} from "commander";
 
